@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+        var intersect = function (nums1, nums2) {
+            // 设置一个数组作为返回值
+            let res = [];
+            // 利用hash进行存值取值
+            let map = new Map();
+            for (let value of nums1) {
+                // 没有value的情况
+                if (!map.has(value)) {
+                    map.set(value, 1)
+                } else {
+                    map.set(value, map.get(value) + 1)
+                }
+            }
+            // 现在hash里面存储了值
+            for (let value of nums2) {
+                // 就是num1和num2都有的情况
+                if (map.has(value)) {
+                    // res.push(value)
+                    if(map.get(value)>0){
+                        map.set(value, map.get(value) - 1);
+                        res.push(value)
+                    }
+                }
+            }
+            return res
+        };
+        console.log(intersect([4,9,5],[9,4,9,8,4]));
+    </script>
+</body>
+
+</html>

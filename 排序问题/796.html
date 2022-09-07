@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var rotateString = function (s, goal) {
+            // 遍历
+            // 假如s首个和goal首个不一致，那么就后移
+            if (s.length !== goal.length) {
+                return false
+            }
+            let dummys = [...s];
+            let dummygoal = [...goal];
+            if (dummys.sort() !== dummygoal.sort()) {
+                return false
+            }
+            let arrs = Array.from(s);
+            let arrgoal = Array.from(goal)
+            for (let i = 0; i < arrs.length; i++) {
+                while (arrs[i] !== arrgoal[i]) {
+                    // s = s.splice(i,1);
+                    let a = arrs.shift();
+                    arrs.push(a)
+                }
+            }
+            if (arrs.join('') === arrgoal.join('')) {
+                return true
+            } else {
+                return false
+            }
+        };
+        let res = rotateString("abcde", "cdeab");
+        console.log(res);
+    </script>
+</body>
+
+</html>

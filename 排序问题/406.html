@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var reconstructQueue = function (people) {
+            // 首先，我们先将升高排序
+            // 首先找一个数组来存放people，身高就可以从大到小排序了
+            // 按照升高排序
+            // people.sort((a, b) => a[0] === b[0] ? a[1] - b[1] : b[0] - a[0])
+            people.sort((a, b) => {
+                if (a[0] === b[0]) {
+                    return a[1] - b[1]
+                } else {
+                    return b[0] - a[0]
+                }
+            })
+            let res = [];
+            // 我们会比较res的index
+            for (let p of people) {
+                if (res.length <= p[1]) {
+                    res.push(p)
+                } else {
+                    // res[p[1]] = p
+                    // 在p[1]这个相应的位置插入
+                    res.splice(p[1], 0, p)
+                }
+            }
+            return res
+        };
+        let result = reconstructQueue([[7, 0], [4, 4], [7, 1], [5, 0], [6, 1], [5, 2]]);
+        console.log(result);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var twoSum = function (nums, target) {
+
+            // // 暴力解
+            // for(let i = 0;i<nums.length;i++){
+            //     for(let j = i+1;j<nums.length;j++){
+            //         if(nums[i]+nums[j] === target){
+            //             return [i,j]
+            //         }
+            //     }
+            // }
+            // 使用map进行计算
+            // 如果插值是可以找到的，那么我们就直接返回
+            // 如果插值找不到，那么就存进去
+            // 首先新建一个map
+            let map = new Map();
+            nums.forEach((item, index) => {
+                let num = target - item;
+                // 如果里面有这个差值，那么就是，直接返回
+                if (map.has(num)) {
+                    return [index, map.get(num)]
+                } else {
+                    map.set(item, index)
+                }
+            })
+            return []
+
+        };
+
+        console.log(twoSum([3,2,4],6));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var canConstruct = function (ransomNote, magazine) {
+            // 判断ransonNote里面可不可以由magazine构成
+            // 暴力解
+            // 首先计算两个里卖弄的数值
+            let hash = new Map();
+            // 将magazine放在hash里，并统计个数
+            for (let value of magazine) {
+                if (hash.has(value)) {
+                    hash.set(value, hash.get(value) + 1)
+                } else {
+                    hash.set(value, 1)
+                }
+            }
+            // 遍历
+            for (let value of ransomNote) {
+                if (hash.has(value)) {
+                    if (hash.get(value) <= 0) {
+                        return false
+                    } else {
+                        hash.set(value, hash.get(value) - 1)
+                    }
+                } else {
+                    return false
+                }
+            }
+            return false
+        };
+        console.log(canConstruct("aa","aab"));
+    </script>
+</body>
+
+</html>

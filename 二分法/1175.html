@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var numPrimeArrangements = function (n) {
+            // 质数只可以排在质数位置上
+            // 其他的可以乱排
+            // 首先先查找质数
+            const MOD = 1e9 + 7
+            let count = 0;
+            for (let i = 0; i < n; i++) {
+                if (definePrimeNum(i + 1)) {
+                    count++
+                }
+            }
+            let noPrime = n - count;
+            let countf = factorial(count)
+            let noPrimef = factorial(noPrime)
+            return (countf + noPrimef) % MOD
+        };
+
+        // 算法，如果有一个数可以被数整除，那么他就会存在一个因子，小于他的平方根，存在另一个因子，大于平方根
+        // 那么我们只要判断在平方根之前，是不是存在数可以被整除就可以了
+        var definePrimeNum = function (num) {
+            let temp = parseInt(Math.sqrt(num))
+            //循环判断
+            for (let i = 2; i <= temp; i++) {
+                if (num % i === 0) {
+                    return false
+                }
+            }
+            return true
+        }
+
+        // 计算阶乘
+        let factorial = function (num) {
+            if (num === 1) {
+                return 1
+            } else if (num === 0) {
+                return 1
+            } else {
+                return num * factorial(num - 1)
+            }
+        }
+        let result = numPrimeArrangements(5);
+        console.log(result);
+    </script>
+</body>
+
+</html>

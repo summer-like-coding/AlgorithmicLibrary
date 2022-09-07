@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建一个树</title>
+</head>
+<body>
+    <script>
+        // 首先先定义Node节点
+        // function Node(data) {
+        //     // 数据
+        //     this.data = data
+        //     // 父节点
+        //     this.parent = null
+        //     // 子节点
+        //     this.children = []
+        // }
+        // // 再次定义一个Tree
+        // function Tree(data) {
+        //     // 新建一个节点
+        //     let node = new Node(data)
+        //     // 初始化树,为其分配根节点
+        //     this._root = node
+        // }
+        // var tree = new Tree('CEO')
+        // console.log(tree);
+
+        // 实现广度优先遍历
+        function treeForeach(tree,func){
+            let node,list = [...tree]
+            while(node = list.unshift()){
+                func(node)
+                node.children && list.push(...node.children)
+            }
+        }
+    </script>
+</body>
+</html>

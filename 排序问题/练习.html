@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 判断一个数是否是素数（又叫质数，只能被1和自身整除的数）
+        function isPrime(num) {
+            var isPrime = true;
+            for (var i = 2; i < num; i++) {
+                if (num % i === 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+            if (isPrime) {
+                return true
+            } else {
+                // console.log(num + '不是质数');
+                return false
+            }
+        }
+
+        var countPrimeSetBits = function (left, right) {
+            let arr = []
+            while (left <= right) {
+                arr.push(parseInt(left).toString(2).split(''))
+                left++
+                // map.set(left,parseInt(left).toString(2))
+            }
+            let num = 0;
+            let count = 0;
+            for (let value of arr) {
+                // console.log(value);
+                for (let i of value) {
+                    // console.log(i);
+                    if (i === '1') {
+                        num++
+                    }
+                }
+                if (isPrime(num)) {
+                    count++
+                }
+                num = 0
+            }
+            return count
+        };
+        console.log(countPrimeSetBits(6, 10));
+    </script>
+</body>
+
+</html>

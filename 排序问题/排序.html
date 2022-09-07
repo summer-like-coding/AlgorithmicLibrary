@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排序</title>
+</head>
+
+<body>
+    <script>
+        let arr = [1, 56, 3, 4, 5, 65, 46, 6, 7, 8];
+        // 冒泡排序
+        // function bubbleSort(arr) {
+        //     for (let i = 0; i < arr.length - 1; i++) {
+        //         for (let j = 0; j < arr.length - 1; j++) {
+        //             if (arr[j + 1] < arr[j]) {
+        //                 let temp = arr[j];
+        //                 arr[j] = arr[j + 1];
+        //                 arr[j + 1] = temp;
+        //             }
+        //         }
+        //     }
+        //     return arr
+        // }
+        // console.log(bubbleSort(arr));
+
+
+        // 选择排序
+        // function selectSort(arr) {
+        //     for (let i = 0; i < arr.length; i++) {
+        //         // 假设便利的第一个是最小的
+        //         let index = i;
+        //         // 寻找最小的
+        //         for (let j = i + 1; j < arr.length; j++) {
+        //             if (arr[j] < arr[index]) {
+        //                 index = j
+        //             }
+        //         }
+        //         // 交换位置
+        //         let temp = arr[i];
+        //         arr[i] = arr[index];
+        //         arr[index] = temp
+        //     }
+        //     return arr
+        // }
+        // console.log(selectSort(arr));
+
+
+        // 插入排序
+        function insertSort(arr) {
+            let preIndex, current;
+            for (let i = 1; i < arr.length; i++) {
+                preIndex = i - 1;
+                current = arr[i];
+                // 假如前面比后面大的话
+                while (preIndex >= 0 && arr[preIndex] > current) {
+                    // 从后开始往后移
+                    arr[preIndex + 1] = arr[preIndex];
+                    preIndex--;
+                }
+                arr[preIndex + 1] = current;
+            }
+            return arr;
+        }
+        console.log(insertSort(arr));
+
+        // 希尔排序
+        // （了解即可）
+    </script>
+</body>
+
+</html>

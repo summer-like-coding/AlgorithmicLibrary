@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var maxDistance = function (nums1, nums2) {
+            // 暴力
+            // 双循环
+            // let len1 = nums1.length;
+            // let len2 = nums2.length;
+            // let max = 0
+            // for (let i = 0; i < len1; i++) {
+            //     for (let j = i; j < len2; j++) {
+            //         if (nums1[i] <= nums2[j]) {
+            //             max = (j-i > max) ? j-1 :max
+            //         }
+            //     }
+            // }
+            // return max
+
+            // 利用双指针，因为两个数组都是非递增的
+            let len1 = nums1.length;
+            let len2 = nums2.length;
+            let i = 0;
+            let max = 0
+            // 我们只需要去遍历nums2，在遍历的时候顺道去判断
+            for (let j = 0; j < len2; j++) {
+                while (i < len1 && nums1[i] > nums2[j]) {
+                    i++
+                }
+                if (i < len1) {
+                    max = Math.max(max, j - i)
+                }
+            }
+            return max
+        };
+        console.log(maxDistance([2, 2, 2], [10, 10, 1]));
+    </script>
+</body>
+
+</html>

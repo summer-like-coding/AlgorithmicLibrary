@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var wordPattern = function (pattern, s) {
+            // 解题思路:
+            // 首先先将字符串拆开，变为数组
+            let arrs = s.split(" ");
+            let arrp = pattern.split('');
+            if (arrs.length !== arrp.length) {
+                return false
+            }
+            // 建立map，用来存储他们对应的关系
+            let map = new Map()
+            //     for (let [value, index] of arrs) {
+            //         if (!map.get(value)) {
+            //             map.set(value, arrs[index])
+            //         } else {
+            //             if (arrs[index] !== map.get(value)) {
+            //                 return false
+
+            //             }
+            //         }
+            //     }
+            //     return true
+
+            // };
+            for (let i = 0; i < arrp.length; i++) {
+                if(!map.get(arrs[i])){
+                    map.set(arrs[i],arrp[i])
+                }else{
+                    if(arrp[i] !== map.get(arrs[i])){
+                        return false
+                    }
+                }
+            }
+            return true
+        }
+        let res = wordPattern('abba', 'dog cat cat fish')
+        console.log(res);
+    </script>
+</body>
+
+</html>

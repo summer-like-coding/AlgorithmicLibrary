@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var merge = function (nums1, m, nums2, n) {
+            // 直接将nums1的后面的0去了
+            nums1.splice(m)
+            let nums = nums1.concat(nums2)
+            // nums1.splice(m, nums1.length - m, ...nums2);
+            nums.sort((a, b) => a - b);
+            // return nums1
+            return nums
+        };
+
+        console.log(merge([1,2,3,0,0,0],3,[2,5,6],3));
+    </script>
+</body>
+
+</html>

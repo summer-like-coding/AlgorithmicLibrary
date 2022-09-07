@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var kWeakestRows = function (mat, k) {
+        //     // 直接暴力
+        //     let res = new Map()
+        //     let resArr = []
+        //     let sum = 0
+        //     let index = 0
+        //     for (let arr of mat) {
+        //         for (let value of arr) {
+        //             sum+=value
+        //         }
+        //         resArr.push(sum)
+        //         res.set(sum, index)
+        //         index++
+        //         sum = 0
+        //     }
+        //     console.log("hash",res);
+        //     resArr.sort((a,b)=>a-b)
+        //     console.log("排序",resArr);
+        //     console.log("hash",res);
+        //     let newArr = resArr.slice(0,k)
+        //     console.log(newArr);
+        //     newArr = newArr.map((item)=>{
+        //         return res.get(item)
+        //     })
+        //     return newArr
+        // };
+        var kWeakestRows = function (mat, k) {
+            let arr = []//保存下标和军人数量
+            let result = []//排序后的最终下标
+            let sol = 0//军人数量
+            for (let i = 0; i < mat.length; i++) {
+                for (let j = 0; j < mat[i].length; j++) {
+                    if (mat[i][j] === 1) {
+                        sol++
+                        //防止第i项全是军人，进入不了else问题,注意清空sol
+                        if (sol === mat[i].length) {
+                            arr.push({ i, num: sol })
+                            sol = 0
+                        }
+                    } else {
+                        //碰到平民就直接将军人数和当前下标进行存储清空sol并停止for循环（break：停止当前循环，continue:停止当次循环）
+                        arr.push({ i, num: sol })
+                        sol = 0
+                        break
+
+                    }
+                }
+            }
+            //sort排序：返回a-b ===从小到大（升序）     返回b-a====从大到小（降序）
+            arr.sort((a, b) => a.num - b.num)
+            //取出对应下标，放进最终数组
+            arr.forEach(item => {
+                result.push(item.i)
+            })
+            //切割对应个数并返回
+            return result.splice(0, k)
+        };
+
+
+        console.log(kWeakestRows([[1, 1, 0, 0, 0], [1, 1, 1, 1, 0], [1, 0, 0, 0, 0], [1, 1, 0, 0, 0], [1, 1, 1, 1, 1]], 3));
+    </script>
+</body>
+
+</html>
