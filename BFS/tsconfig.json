@@ -46,6 +46,7 @@
         // 不允许有指定不明确的this
         "noImplicitThis": true,
         // 严格的检查空值，对于一些值，他们可能为空
-        "strictNullChecks": false
+        "strictNullChecks": false,
+        "sourceMap": true
     }
 }
