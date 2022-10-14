@@ -2,7 +2,7 @@
 
 ## 核心概念
 
-`BFS`一般都是解决：从一个点到一个点的**最短**距离
+`BFS`一般都是解决：从一个点到一个点的**最短**距离和层序遍历问题
 
 `BFS`的核心其实就是处理一个队列`queue`,不断地压入和弹出数据，进行判断，他是不是距离最近的那个节点
 
@@ -185,7 +185,104 @@ function openLock(deadends: string[], target: string): number {
 };
 ```
 
+### 二叉树的层序遍历
 
+链接：[102. 二叉树的层序遍历 - 力扣（LeetCode）](https://leetcode.cn/problems/binary-tree-level-order-traversal/)
 
+解题思路：
 
+1. 这里我们用到的其实也是一个`BFS`，那么很明显就是来维护一个队列`queue`
+2. 按照题目的要求，也就是我们每一层用一个数组来进行表示，也就是在这一层结束以后，我们需要将这一层所表示的数组`push`进我的`res`结果里
+3. 那么现在就需要解决的问题是，如何表示这一层呢？
+4. 假如，现在我们处于根节点那一层，那我肯定那一层只有一个根节点
+5. 那么往下，我的第二层，肯定是由我根节点的左右节点组成的，那么我们就将`左`,`右`节点放进去，并统计`len`
+6. 这个`len`就是表示：我这一层的节点个数
+7. 那么我现在只需要将这个节点的值，放进去`list`就完了
+
+代码：
+
+```typescript
+function levelOrder(root: TreeNode | null): number[][] {
+    // 这是一个BFS，主要核心就是维护一个数组，对数组进行pop和push
+    // 首先先将单个元素push进去
+    let res:number[][] = []
+    // 这个就是判断已经走了哪些节点
+    let queue:TreeNode[] = []
+    queue.push(root)
+    if(!root){
+        return res
+    }
+    while(queue.length){
+        let size = queue.length;
+        //console.log("size",size)
+        //console.log("queue",queue)
+        //获取这一层的节点
+        let list = []
+        // 向四处进行扩散
+        for(let i = 0;i<size;i++){
+            // 首先向取出队列里的第一个节点
+            let cur:TreeNode = queue.shift()
+            // 
+            list.push(cur.val)
+            //console.log("list",list)
+            //判断它是不是又左右节点
+            if(cur.left){
+                // 那么在队列里插入
+                queue.push(cur.left)
+            }
+            if(cur.right){
+                queue.push(cur.right)
+            }
+        }
+        // 这时，这一层已经遍历好了
+        res.push(list)
+    }
+    return res
+};
+```
+
+二叉树的层序遍历2
+
+链接：[107. 二叉树的层序遍历 II - 力扣（LeetCode）](https://leetcode.cn/problems/binary-tree-level-order-traversal-ii/)
+
+题解：
+
+1. 其实思路和上面层序遍历一样，唯一的不同就是，我这边是从下往上，也就是一种先进后出的意思
+2. 那么我们很容易想到，这次我们维护的其实就是一个`栈`
+
+代码：
+
+```typescript
+
+function levelOrderBottom(root: TreeNode | null): number[][] {
+    // 按照套路，我们这个同样也是BFS
+    // 那么这时，我们维护的就不是一个队列，而是一个栈，因为这个可以做到，先进后出
+    let res:number[][] = []
+    let stack:TreeNode[] = []
+    // 首先将根节点放进去
+    if(!root){
+        return []
+    }
+    stack.push(root)
+    // 现在进行向外扩展
+    while(stack.length){
+        let list:number[] = []
+        // 首先获得当前的stack的大小
+        let size = stack.length;
+        for(let i = 0;i<size;i++){
+            let cur = stack.shift()
+            list.push(cur.val)
+            if(cur.left){
+                stack.push(cur.left)
+            }
+            if(cur.right){
+                stack.push(cur.right)
+            }
+        }
+        // 现在将这个值放进数组
+        res.unshift(list)
+    }
+    return res
+};
+```
 
